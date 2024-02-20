@@ -4,7 +4,7 @@ import requests
 
 parser = argparse.ArgumentParser()
 parser.add_argument('Date', type=str,
-                        help='Format: YYYY-MM-DD')
+                        help='Input day in this format: YYYY-MM-DD')
 args = parser.parse_args()
 
 date = args.Date
