@@ -1,7 +1,13 @@
 import json
+import argparse
 import requests
 
-date = input("Введите дату в формате YEAR-MM-DD: ")
+parser = argparse.ArgumentParser()
+parser.add_argument('Date', type=str,
+                        help='Format: YYYY-MM-DD')
+args = parser.parse_args()
+
+date = args.Date
 link = 'https://vsmuta.com/api/logs/blood/'
 response = requests.get(link+date)
 if response.status_code == 200:
@@ -24,11 +30,12 @@ if response.status_code == 200:
 
         print(f"Количество игроков: {winners_counter+losers_counter}\n"
               f"Количество кланов: {len(clans_counter)}\n"
-              f"Кланы:\n")
+              f"Кланы:")
         for clan in clans_counter:
-            print(clan)
+            print(f"{clan}\n"
+                  f"Победы: {clans_counter[clan][0]}\n"
+                  f"Поражения: {clans_counter[clan][1]}\n")
 
-#2024-02-19
 
     else:
         print(f"Error: {data['message']}")
